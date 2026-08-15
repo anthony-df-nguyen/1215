@@ -6,6 +6,7 @@ import { AddMemoryForm } from "@/components/AddMemoryForm";
 import { MemoryCard } from "@/components/MemoryCard";
 import { UserMenu } from "@/components/UserMenu";
 import { YearFilter } from "@/components/YearFilter";
+import { MemoryListScroll } from "@/components/MemoryListScroll";
 import { memoryYear } from "@/lib/date";
 
 async function signOutAction() {
@@ -90,7 +91,7 @@ export default async function Home({
           <YearFilter years={years} />
         </div>
 
-        <div className="flex-1 overflow-y-auto pb-8 sm:pb-10">
+        <MemoryListScroll className="flex-1 overflow-y-auto pb-8 sm:pb-10">
           {groups.length === 0 && allMemories.length === 0 && (
             <p className="text-sand-600">No memories yet. Add the first one.</p>
           )}
@@ -118,7 +119,7 @@ export default async function Home({
               </section>
             ))}
           </div>
-        </div>
+        </MemoryListScroll>
       </main>
     </div>
   );

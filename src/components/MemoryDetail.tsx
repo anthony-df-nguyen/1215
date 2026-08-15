@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { Memory } from "@/db/schema";
 import { updateMemory, deleteMemory } from "@/app/actions";
@@ -9,6 +10,20 @@ import { MemoryForm } from "./MemoryForm";
 
 export function MemoryDetail({ memory }: { memory: Memory }) {
   const [editing, setEditing] = useState(false);
+  const router = useRouter();
+
+  function goToAllMemories(e: React.MouseEvent) {
+    e.preventDefault();
+    // Prefer a real back-navigation so the homepage's scroll position is
+    // restored (see MemoryCard, which sets this flag right before linking
+    // here). Fall back to a fresh push when we weren't navigated here from
+    // the homepage in this tab (e.g. a direct link/bookmark to a memory).
+    if (sessionStorage.getItem("nav-from-home") === "1") {
+      router.back();
+    } else {
+      router.push("/");
+    }
+  }
 
   if (editing) {
     return (
@@ -31,6 +46,7 @@ export function MemoryDetail({ memory }: { memory: Memory }) {
       <div className="flex items-center justify-between gap-3">
         <Link
           href="/"
+          onClick={goToAllMemories}
           className="text-[13px] font-semibold text-sand-700 hover:text-clay-700"
         >
           ← All memories

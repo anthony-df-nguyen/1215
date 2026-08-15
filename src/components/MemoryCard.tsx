@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import type { Memory } from "@/db/schema";
 import { formatMemoryDate } from "@/lib/date";
@@ -5,7 +7,11 @@ import { formatMemoryDate } from "@/lib/date";
 export function MemoryCard({ memory }: { memory: Memory }) {
   return (
     <div className="rounded-md bg-sand-100 p-4 shadow-sm transition-shadow hover:shadow-md">
-      <Link href={`/memories/${memory.id}`} className="block">
+      <Link
+        href={`/memories/${memory.id}`}
+        className="block"
+        onClick={() => sessionStorage.setItem("nav-from-home", "1")}
+      >
         <p className="kicker">
           {formatMemoryDate(memory.memoryDate, memory.datePrecision)}
         </p>
