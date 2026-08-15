@@ -188,7 +188,7 @@ export function MemoryForm({
             />
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <fieldset className="field">
               <legend>How exact is this date?</legend>
               <div className="seg">
