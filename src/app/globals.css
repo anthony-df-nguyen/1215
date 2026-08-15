@@ -173,6 +173,17 @@ a { text-underline-offset: 3px; }
 .input:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
 textarea.input { min-height: 90px; resize: vertical; border-radius: var(--radius-md); }
 
+/* iOS Safari sizes date/month/time controls by their internal content
+   (calendar icon + spinner) and ignores width/max-width unless appearance
+   is reset — otherwise they overflow their flex/grid container. */
+input.input[type="date"],
+input.input[type="month"],
+input.input[type="time"] {
+  -webkit-appearance: none;
+  appearance: none;
+  overflow: hidden;
+}
+
 /* Segmented control — one option per choice, the checked one goes solid. */
 .seg {
   display: inline-flex; gap: 2px; padding: 3px;
