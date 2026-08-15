@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:wipe": "docker compose exec -T postgres psql -U postgres -d main -c 'DROP SCHEMA public CASCADE; CREATE SCHEMA public;'",
+    "db:migrate:local": "./scripts/db-migrate-local.sh",
+    "db:seed": "NODE_ENV=development tsx src/db/seed.ts",
+    "db:reset": "yarn db:wipe && yarn db:migrate:local && yarn db:seed"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
@@ -26,6 +30,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.1",
     "tailwindcss": "^4",
+    "tsx": "^4.23.12",
     "typescript": "^5"
   }
 }
