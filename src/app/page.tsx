@@ -91,7 +91,7 @@ export default async function Home({
           <YearFilter years={years} />
         </div>
 
-        <MemoryListScroll className="flex-1 overflow-y-auto pb-8 sm:pb-10">
+        <MemoryListScroll className="scrollbar-hidden flex-1 overflow-y-auto pb-8 sm:pb-10">
           {groups.length === 0 && allMemories.length === 0 && (
             <p className="text-sand-600">No memories yet. Add the first one.</p>
           )}

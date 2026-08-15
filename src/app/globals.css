@@ -221,3 +221,7 @@ input.input[type="time"] {
 
 /* — rounded frame: everything softens, small controls go pill — */
 .btn, .tag, .seg, .input { border-radius: 999px; }
+
+/* Scrollable but no visible scrollbar track (still scrolls via wheel/trackpad/keys). */
+.scrollbar-hidden { scrollbar-width: none; }
+.scrollbar-hidden::-webkit-scrollbar { display: none; }

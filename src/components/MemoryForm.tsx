@@ -360,7 +360,7 @@ export function MemoryForm({
                       addLink();
                     }
                   }}
-                  className="input flex-1"
+                  className="input flex-2"
                 />
                 <input
                   id="linkLabelInput"
@@ -374,7 +374,7 @@ export function MemoryForm({
                       addLink();
                     }
                   }}
-                  className="input sm:w-40"
+                  className="input sm:flex-1"
                 />
                 <button
                   type="button"
