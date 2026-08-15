@@ -7,8 +7,9 @@ export function YearFilter({ years }: { years: string[] }) {
   const searchParams = useSearchParams();
   const selected = searchParams.get("year") ?? "";
 
-  function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    const year = e.target.value;
+  if (years.length === 0) return null;
+
+  function href(year: string) {
     const params = new URLSearchParams(searchParams.toString());
     if (year) {
       params.set("year", year);
@@ -16,19 +17,17 @@ export function YearFilter({ years }: { years: string[] }) {
       params.delete("year");
     }
     const query = params.toString();
-    router.push(query ? `/?${query}` : "/");
+    return query ? `/?${query}` : "/";
   }
-
-  if (years.length === 0) return null;
 
   return (
     <select
-      value={selected}
-      onChange={handleChange}
-      className="rounded-full border border-amber-200 bg-white px-3 py-1.5 text-sm font-medium text-stone-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-200"
       aria-label="Filter by year"
+      value={selected}
+      onChange={(event) => router.push(href(event.target.value))}
+      className="rounded-full border border-sand-300 bg-sand-100 px-3.5 py-1.5 text-xs text-sand-800 transition-colors hover:bg-sand-200 focus:border-clay focus:outline-none"
     >
-      <option value="">All years</option>
+      <option value="">All</option>
       {years.map((year) => (
         <option key={year} value={year}>
           {year}

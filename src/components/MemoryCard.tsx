@@ -4,17 +4,17 @@ import { formatMemoryDate } from "@/lib/date";
 
 export function MemoryCard({ memory }: { memory: Memory }) {
   return (
-    <div className="rounded-2xl border border-amber-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
+    <div className="rounded-md bg-sand-100 p-4 shadow-sm transition-shadow hover:shadow-md">
       <Link href={`/memories/${memory.id}`} className="block">
-        <div>
-          <p className="text-xs font-medium text-amber-600">
-            {formatMemoryDate(memory.memoryDate, memory.datePrecision)}
-          </p>
-          <h3 className="text-md font-semibold text-stone-800">{memory.title}</h3>
-        </div>
+        <p className="kicker">
+          {formatMemoryDate(memory.memoryDate, memory.datePrecision)}
+        </p>
+        <h3 className="mt-1 font-heading text-[19px] leading-tight text-ink">
+          {memory.title}
+        </h3>
 
         {memory.description && (
-          <p className="mt-2 text-sm whitespace-pre-wrap text-stone-600">
+          <p className="mt-1 text-[13px] leading-normal whitespace-pre-wrap text-sand-800">
             {memory.description}
           </p>
         )}
@@ -22,13 +22,13 @@ export function MemoryCard({ memory }: { memory: Memory }) {
         {memory.images.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-2">
             {memory.images.map((src) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
+              <div
                 key={src}
-                src={src}
-                alt=""
-                className="h-24 w-24 rounded-xl object-cover shadow-sm"
-              />
+                className="washed h-21 w-21 overflow-hidden rounded-md"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={src} alt="" className="h-full w-full object-cover" />
+              </div>
             ))}
           </div>
         )}
@@ -42,9 +42,9 @@ export function MemoryCard({ memory }: { memory: Memory }) {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="max-w-full truncate rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs text-amber-700 transition-colors hover:bg-amber-100"
+              className="tag tag-outline max-w-full truncate transition-colors hover:bg-clay-100"
             >
-              {link.label || link.url}
+              {link.label || link.url} ↗
             </a>
           ))}
         </div>

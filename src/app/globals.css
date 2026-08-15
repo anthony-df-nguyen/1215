@@ -1,23 +1,211 @@
 @import "tailwindcss";
 
+/* ══════════════════════════════════════════════════════════════════════════
+   Organic — design-system tokens, mirrored from the Claude Design project
+   `_ds/organic-…/styles.css`. Retune the look here.
+   ══════════════════════════════════════════════════════════════════════ */
+
 :root {
-  --background: #fdf8f1;
-  --foreground: #44403c;
-  --accent: #f59e0b;
-  --accent-foreground: #ffffff;
+  --color-bg: #f5ead8;
+  --color-surface: #ebddc5;
+  --color-text: #201e1d;
+  --color-accent: #c67139;
+  --color-accent-2: #7a8a5e;
+  --color-divider: color-mix(in srgb, #201e1d 16%, transparent);
+
+  /* Tonal ramps — generated in OKLCH on one shared lightness scale, so the
+     same step of any role matches the others in visual value. */
+  --color-neutral-100: #f9f4ed;
+  --color-neutral-200: #eee7db;
+  --color-neutral-300: #dcd3c4;
+  --color-neutral-400: #c0b6a5;
+  --color-neutral-500: #a19786;
+  --color-neutral-600: #82796a;
+  --color-neutral-700: #645c50;
+  --color-neutral-800: #474238;
+  --color-neutral-900: #2e2b25;
+
+  --color-accent-100: #fff2eb;
+  --color-accent-200: #ffe1d0;
+  --color-accent-300: #ffc6a5;
+  --color-accent-400: #f6a06b;
+  --color-accent-500: #d67f48;
+  --color-accent-600: #b2622d;
+  --color-accent-700: #8c491a;
+  --color-accent-800: #643312;
+  --color-accent-900: #402310;
+
+  --color-accent-2-100: #f0fae1;
+  --color-accent-2-200: #e1eecc;
+  --color-accent-2-300: #ccdbb2;
+  --color-accent-2-400: #aebf92;
+  --color-accent-2-500: #8fa073;
+  --color-accent-2-600: #728157;
+  --color-accent-2-700: #56633f;
+  --color-accent-2-800: #3d472b;
+  --color-accent-2-900: #272e1b;
+
+  --font-heading: var(--font-caprasimo), system-ui, sans-serif;
+  --font-heading-weight: 400;
+  --font-body: var(--font-figtree), system-ui, sans-serif;
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+
+  /* Elevation — soft ink-tinted shadows on the cream ground. */
+  --shadow-sm: 0 1px 2px color-mix(in srgb, #2e2b25 14%, transparent);
+  --shadow-md: 0 3px 10px color-mix(in srgb, #2e2b25 16%, transparent);
+  --shadow-lg: 0 12px 32px color-mix(in srgb, #2e2b25 22%, transparent);
 }
 
+/* Tailwind utility names for the same tokens. The `--color-*` namespace is
+   Tailwind's, so the ramps are re-exposed under non-colliding role names:
+   clay = accent, sage = accent-2, sand = neutral. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cream: var(--color-bg);
+  --color-shell: var(--color-surface);
+  --color-ink: var(--color-text);
+
+  --color-sand-100: var(--color-neutral-100);
+  --color-sand-200: var(--color-neutral-200);
+  --color-sand-300: var(--color-neutral-300);
+  --color-sand-400: var(--color-neutral-400);
+  --color-sand-500: var(--color-neutral-500);
+  --color-sand-600: var(--color-neutral-600);
+  --color-sand-700: var(--color-neutral-700);
+  --color-sand-800: var(--color-neutral-800);
+  --color-sand-900: var(--color-neutral-900);
+
+  --color-clay-100: var(--color-accent-100);
+  --color-clay-200: var(--color-accent-200);
+  --color-clay-300: var(--color-accent-300);
+  --color-clay-400: var(--color-accent-400);
+  --color-clay-500: var(--color-accent-500);
+  --color-clay-600: var(--color-accent-600);
+  --color-clay-700: var(--color-accent-700);
+  --color-clay-800: var(--color-accent-800);
+  --color-clay-900: var(--color-accent-900);
+  --color-clay: var(--color-accent);
+
+  --color-sage-100: var(--color-accent-2-100);
+  --color-sage-200: var(--color-accent-2-200);
+  --color-sage-300: var(--color-accent-2-300);
+  --color-sage-400: var(--color-accent-2-400);
+  --color-sage-500: var(--color-accent-2-500);
+  --color-sage-600: var(--color-accent-2-600);
+  --color-sage-700: var(--color-accent-2-700);
+  --color-sage-800: var(--color-accent-2-800);
+  --color-sage-900: var(--color-accent-2-900);
+  --color-sage: var(--color-accent-2);
+
+  --font-heading: var(--font-caprasimo), system-ui, sans-serif;
+  --font-sans: var(--font-figtree), system-ui, sans-serif;
 }
+
+/* `rounded-sm|md|lg` and `shadow-sm|md|lg` read Tailwind's own `--radius-*` /
+   `--shadow-*` vars, which the unlayered `:root` above already redefines to
+   the DS scale — so those utilities emit DS values with no mapping here. */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+a { text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+::selection { background: color-mix(in srgb, var(--color-accent) 30%, transparent); }
+
+/* Photography in this system is washed back so it sits inside the cream
+   palette rather than punching through it. */
+.washed { filter: saturate(0.6) contrast(0.85) brightness(1.1) opacity(0.94); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Components — plain CSS on plain HTML, same classes as the design system.
+   The rounded frame at the end takes small controls to a pill.
+   ══════════════════════════════════════════════════════════════════════ */
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  cursor: pointer; text-decoration: none;
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 14px; line-height: 1.2; color: var(--color-text);
+  background: transparent; border: 1px solid transparent;
+  padding: 9px 16px;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-primary { background: var(--color-accent); color: var(--color-bg); }
+.btn-primary:hover { background: var(--color-accent-600); }
+.btn-primary:active { background: var(--color-accent-700); }
+.btn-secondary { border-color: var(--color-divider); }
+.btn-secondary:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+.btn-secondary:active { background: color-mix(in srgb, var(--color-text) 14%, transparent); }
+.btn-ghost { color: var(--color-accent); }
+.btn-ghost:hover { background: color-mix(in srgb, var(--color-accent) 10%, transparent); }
+.btn-ghost:active { background: color-mix(in srgb, var(--color-accent) 18%, transparent); }
+.btn-sm { padding: 7px 14px; font-size: 12px; }
+.btn-block { width: 100%; padding: 12px; }
+
+.field { display: flex; flex-direction: column; min-width: 0; border: 0; padding: 0; margin: 0; }
+.field > label, .field > legend {
+  display: block; font-size: 12px; margin-bottom: 5px;
+  color: color-mix(in srgb, var(--color-text) 70%, transparent);
+}
+.input {
+  width: 100%; min-height: 38px; padding: 6px 14px; font: inherit;
+  font-size: 14px; color: var(--color-text); caret-color: var(--color-accent);
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider);
+}
+.input:hover { border-color: color-mix(in srgb, var(--color-text) 45%, transparent); }
+.input:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
+textarea.input { min-height: 90px; resize: vertical; border-radius: var(--radius-md); }
+
+/* Segmented control — one option per choice, the checked one goes solid. */
+.seg {
+  display: inline-flex; gap: 2px; padding: 3px;
+  border: 1px solid var(--color-divider);
+  background: color-mix(in srgb, var(--color-text) 4%, transparent);
+}
+.seg-opt {
+  display: inline-flex; align-items: center; justify-content: center; flex: 1;
+  padding: 7px 12px; font-size: 13px; cursor: pointer; white-space: nowrap;
+  border-radius: 999px;
+}
+.seg-opt input { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
+.seg-opt:has(input:checked) { background: var(--color-accent); color: var(--color-bg); }
+.seg-opt:not(:has(input:checked)):hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+.seg-opt:has(input:focus-visible) { outline: 2px solid var(--color-accent); outline-offset: -2px; }
+
+.tag {
+  display: inline-flex; align-items: center; font-size: 11px;
+  letter-spacing: 0.02em; padding: 3px 10px;
+}
+.tag-accent { background: var(--color-accent-100); color: var(--color-accent-800); }
+.tag-accent-2 { background: var(--color-accent-2-100); color: var(--color-accent-2-800); }
+.tag-neutral { background: var(--color-neutral-100); color: var(--color-neutral-800); }
+.tag-outline { border: 1px solid var(--color-accent); color: var(--color-accent); }
+
+.elev-sm { box-shadow: var(--shadow-sm); }
+.elev-md { box-shadow: var(--shadow-md); }
+.elev-lg { box-shadow: var(--shadow-lg); }
+
+/* The date kicker that opens every memory — 2a, 2d. */
+.kicker {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+  font-weight: 600; color: var(--color-accent-700);
+}
+
+/* — rounded frame: everything softens, small controls go pill — */
+.btn, .tag, .seg, .input { border-radius: 999px; }

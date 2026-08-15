@@ -29,10 +29,10 @@ export function UserMenu({
   }, [open]);
 
   return (
-    <div ref={containerRef} className="">
+    <div ref={containerRef} className="relative">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="flex items-center rounded-full transition-shadow focus:outline-none focus:ring-2 focus:ring-amber-200"
+        className="flex items-center rounded-full transition-shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-clay-300"
         aria-haspopup="menu"
         aria-expanded={open}
       >
@@ -42,10 +42,10 @@ export function UserMenu({
       {open && (
         <div
           role="menu"
-          className="absolute right-0 top-full z-10 mt-2 w-44 overflow-hidden rounded-xl border border-amber-100 bg-white p-1 shadow-lg"
+          className="absolute right-0 top-full z-10 mt-2 w-44 overflow-hidden rounded-md bg-sand-100 p-1 shadow-lg"
         >
           {(name || email) && (
-            <div className="truncate px-3 py-2 text-xs text-stone-400">
+            <div className="truncate px-3 py-2 text-xs text-sand-600">
               {name ?? email}
             </div>
           )}
@@ -56,7 +56,7 @@ export function UserMenu({
             <button
               type="submit"
               role="menuitem"
-              className="w-full rounded-lg px-3 py-2 text-left text-sm text-stone-600 transition-colors hover:bg-amber-50"
+              className="w-full rounded-full px-3 py-2 text-left text-sm text-sand-800 transition-colors hover:bg-sand-200"
             >
               Sign out
             </button>

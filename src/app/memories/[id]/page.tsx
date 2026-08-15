@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { db } from "@/db";
 import { memories } from "@/db/schema";
@@ -31,15 +30,8 @@ export default async function MemoryPage({
   }
 
   return (
-    <div className="flex flex-1 flex-col bg-gradient-to-b from-amber-50 via-rose-50/40 to-white">
-      <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-5 px-4 py-6 sm:gap-6 sm:px-6 sm:py-10">
-        <Link
-          href="/"
-          className="text-sm font-medium text-amber-600 hover:underline"
-        >
-          ← Back to timeline
-        </Link>
-
+    <div className="flex flex-1 flex-col bg-cream">
+      <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col px-5 py-6 sm:px-6 sm:py-9">
         <MemoryDetail memory={memory} />
       </main>
     </div>

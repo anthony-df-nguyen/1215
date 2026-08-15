@@ -23,7 +23,7 @@ export function UserAvatar({
       <img
         src={image}
         alt={name ?? email ?? "User"}
-        className="block h-8 w-8 rounded-full border border-amber-200 object-cover"
+        className="block h-8 w-8 rounded-full border border-sand-300 object-cover"
       />
     );
   }
@@ -31,7 +31,7 @@ export function UserAvatar({
   return (
     <div
       title={name ?? email ?? undefined}
-      className="flex h-8 w-8 items-center justify-center rounded-full border border-amber-200 bg-amber-100 text-xs font-medium text-amber-700"
+      className="flex h-8 w-8 items-center justify-center rounded-full border border-sand-300 bg-clay-100 text-xs font-medium text-clay-700"
     >
       {initials(name, email)}
     </div>
