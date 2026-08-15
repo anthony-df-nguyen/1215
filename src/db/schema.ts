@@ -2,6 +2,11 @@ import { pgTable, serial, text, date, varchar, timestamp, jsonb, pgEnum } from "
 
 export const datePrecisionEnum = pgEnum("date_precision", ["day", "month", "year"]);
 
+export type MemoryLink = {
+  url: string;
+  label?: string;
+};
+
 export const memories = pgTable("memories", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
@@ -10,6 +15,7 @@ export const memories = pgTable("memories", {
   datePrecision: datePrecisionEnum("date_precision").notNull().default("day"),
   createdBy: varchar("created_by", { length: 256 }).notNull(),
   images: jsonb("images").$type<string[]>().notNull().default([]),
+  links: jsonb("links").$type<MemoryLink[]>().notNull().default([]),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

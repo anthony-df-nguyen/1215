@@ -2,6 +2,8 @@
 
 A private web app for logging and browsing shared memories. Two-user access only, gated by Google sign-in.
 
+Memories are shown as a vertical chronological timeline, grouped by year with a year filter. Each memory can have a title, description, a date recorded at day/month/year precision, up to 3 photos (pasted https image URLs), and up to 10 links (URL + optional label) to related content. Memories can be created, edited, and hard-deleted via server actions.
+
 ## Stack
 
 - Next.js (App Router) + TypeScript
@@ -40,7 +42,7 @@ yarn dev
 
 Schema lives in `src/db/schema.ts`. Currently one table:
 
-- `memories` — id, title, description, date, created_by, image_url (nullable, for future photo support), created_at
+- `memories` — id, title, description, memory_date, date_precision (day/month/year), created_by, images (jsonb array of https photo URLs, up to 3 per memory), links (jsonb array of `{ url, label? }`, up to 10 per memory), created_at
 
 Since this is a flat Postgres schema, it can be queried directly with any Python/SQL client (e.g. `psycopg2`, `pandas.read_sql`) using the same `DATABASE_URL`.
 
@@ -53,6 +55,6 @@ Since this is a flat Postgres schema, it can be queried directly with any Python
 
 ## Roadmap
 
-- Photo uploads (object storage, populate `image_url`)
-- Search / filtering
+- Native photo upload (object storage) instead of pasted image URLs
+- Full-text / keyword search across title & description
 - Tagging, locations

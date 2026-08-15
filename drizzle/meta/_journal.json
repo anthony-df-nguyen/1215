@@ -8,6 +8,13 @@
       "when": 1786692385040,
       "tag": "0000_lucky_hammerhead",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1786776299985,
+      "tag": "0001_strange_stryfe",
+      "breakpoints": true
     }
   ]
 }

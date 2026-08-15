@@ -1,0 +1,1 @@
+ALTER TABLE "memories" ADD COLUMN "links" jsonb DEFAULT '[]'::jsonb NOT NULL;
