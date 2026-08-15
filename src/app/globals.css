@@ -163,7 +163,8 @@ a { text-underline-offset: 3px; }
   color: color-mix(in srgb, var(--color-text) 70%, transparent);
 }
 .input {
-  width: 100%; min-width: 0; min-height: 38px; padding: 6px 14px; font: inherit;
+  box-sizing: border-box;
+  width: 100%; min-width: 0; max-width: 100%; min-height: 38px; padding: 6px 14px; font: inherit;
   font-size: 14px; color: var(--color-text); caret-color: var(--color-accent);
   background: var(--color-surface);
   border: 1px solid var(--color-divider);
