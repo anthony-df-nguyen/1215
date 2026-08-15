@@ -98,7 +98,7 @@ export function MemoryDetail({ memory }: { memory: Memory }) {
               key={src}
               src={src}
               alt=""
-              className="washed max-h-64 w-auto max-w-full rounded-lg bg-sand-100"
+              className="max-h-64 w-auto max-w-full rounded-md bg-sand-100"
             />
           ))}
         </div>
@@ -120,11 +120,8 @@ export function MemoryDetail({ memory }: { memory: Memory }) {
         </div>
       )}
 
-      <div className="mt-5 flex justify-between gap-3 rounded-full bg-sand-100 px-4 py-3 text-xs text-sand-700">
+      <div className="mt-5 rounded-full text-xs text-sand-700">
         <span className="truncate">Added by {memory.createdBy}</span>
-        <span className="shrink-0">
-          {formatMemoryDate(memory.memoryDate, memory.datePrecision)}
-        </span>
       </div>
     </div>
   );
