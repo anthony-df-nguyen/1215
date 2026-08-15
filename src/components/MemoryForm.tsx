@@ -243,7 +243,7 @@ export function MemoryForm({
           <div className="flex flex-wrap gap-2.5">
             {images.map((src) => (
               <div key={src} className="relative h-17.5 w-17.5 shrink-0">
-                <div className="washed h-full w-full overflow-hidden rounded-md">
+                <div className="h-full w-full overflow-hidden rounded-md">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={src}

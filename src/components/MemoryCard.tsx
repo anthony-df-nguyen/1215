@@ -24,7 +24,7 @@ export function MemoryCard({ memory }: { memory: Memory }) {
             {memory.images.map((src) => (
               <div
                 key={src}
-                className="washed h-21 w-21 overflow-hidden rounded-md"
+                className="h-21 w-21 overflow-hidden rounded-md"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={src} alt="" className="h-full w-full object-cover" />

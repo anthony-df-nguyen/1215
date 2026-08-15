@@ -22,8 +22,6 @@ export function MemoryDetail({ memory }: { memory: Memory }) {
     );
   }
 
-  const [lead, ...rest] = memory.images;
-
   return (
     <div className="flex flex-col">
       <div className="flex items-center justify-between gap-3">
@@ -70,21 +68,15 @@ export function MemoryDetail({ memory }: { memory: Memory }) {
       </div>
 
       {memory.images.length > 0 && (
-        <div className="mt-4 grid grid-cols-2 gap-2.5">
-          <div className="washed col-span-2 h-45 overflow-hidden rounded-lg">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={lead} alt="" className="h-full w-full object-cover" />
-          </div>
-          {rest.map((src) => (
-            <div
+        <div className="mt-4 flex flex-wrap gap-2.5">
+          {memory.images.map((src) => (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
               key={src}
-              className={`washed h-26 overflow-hidden rounded-md ${
-                rest.length === 1 ? "col-span-2" : ""
-              }`}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src} alt="" className="h-full w-full object-cover" />
-            </div>
+              src={src}
+              alt=""
+              className="washed max-h-64 w-auto max-w-full rounded-lg bg-sand-100"
+            />
           ))}
         </div>
       )}
