@@ -141,13 +141,17 @@ export function MemoryForm({
   }
 
   return (
-    <form action={action} onSubmit={() => onDone?.()} className="flex flex-col">
+    <form
+      action={action}
+      onSubmit={() => onDone?.()}
+      className="flex min-h-0 flex-1 flex-col"
+    >
       {memory && <input type="hidden" name="id" value={memory.id} />}
       <input type="hidden" name="memoryDate" value={computeMemoryDate()} />
       <input type="hidden" name="images" value={JSON.stringify(images)} />
       <input type="hidden" name="links" value={JSON.stringify(links)} />
 
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex shrink-0 items-center justify-between gap-3 border-b border-sand-200 bg-cream px-5 py-4 sm:px-6">
         <h2 className="text-xl">{heading}</h2>
         {onDone && (
           <button
@@ -160,234 +164,238 @@ export function MemoryForm({
         )}
       </div>
 
-      <div className="mt-5 flex flex-col gap-4">
-        <div className="field">
-          <label htmlFor="title">Title</label>
-          <input
-            id="title"
-            name="title"
-            required
-            defaultValue={memory?.title}
-            className="input"
-          />
-        </div>
-
-        <div className="field">
-          <label htmlFor="description">What happened</label>
-          <textarea
-            id="description"
-            name="description"
-            rows={3}
-            defaultValue={memory?.description ?? ""}
-            className="input"
-          />
-        </div>
-
-        <div className="grid gap-4 sm:grid-cols-2">
-          <fieldset className="field">
-            <legend>How exact is this date?</legend>
-            <div className="seg">
-              {PRECISIONS.map((option) => (
-                <label key={option.value} className="seg-opt">
-                  <input
-                    type="radio"
-                    name="datePrecision"
-                    value={option.value}
-                    checked={precision === option.value}
-                    onChange={() => handlePrecisionChange(option.value)}
-                  />
-                  {option.label}
-                </label>
-              ))}
-            </div>
-          </fieldset>
+      <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5 sm:px-6">
+        <div className="flex flex-col gap-4">
+          <div className="field">
+            <label htmlFor="title">Title</label>
+            <input
+              id="title"
+              name="title"
+              required
+              defaultValue={memory?.title}
+              className="input"
+            />
+          </div>
 
           <div className="field">
-            <label htmlFor="dateValue">Date</label>
-            {precision === "year" ? (
-              <input
-                id="dateValue"
-                type="number"
-                required
-                min={1}
-                max={9999}
-                value={dateValue}
-                onChange={(e) => setDateValue(e.target.value)}
-                className="input"
-              />
-            ) : precision === "month" ? (
-              <input
-                id="dateValue"
-                type="month"
-                required
-                value={dateValue}
-                onChange={(e) => setDateValue(e.target.value)}
-                className="input"
-              />
-            ) : (
-              <input
-                id="dateValue"
-                type="date"
-                required
-                value={dateValue}
-                onChange={(e) => setDateValue(e.target.value)}
-                className="input"
-              />
-            )}
+            <label htmlFor="description">What happened</label>
+            <textarea
+              id="description"
+              name="description"
+              rows={3}
+              defaultValue={memory?.description ?? ""}
+              className="input"
+            />
           </div>
-        </div>
 
-        <div className="field">
-          <label htmlFor="imageUrlInput">Photos</label>
-
-          <div className="flex flex-wrap gap-2.5">
-            {images.map((src) => (
-              <div key={src} className="relative h-17.5 w-17.5 shrink-0">
-                <div className="h-full w-full overflow-hidden rounded-md">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={src}
-                    alt=""
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <button
-                  type="button"
-                  onClick={() => removeImage(src)}
-                  aria-label="Remove photo"
-                  className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-sand-900 text-xs text-cream shadow-sm"
-                >
-                  ×
-                </button>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <fieldset className="field">
+              <legend>How exact is this date?</legend>
+              <div className="seg">
+                {PRECISIONS.map((option) => (
+                  <label key={option.value} className="seg-opt">
+                    <input
+                      type="radio"
+                      name="datePrecision"
+                      value={option.value}
+                      checked={precision === option.value}
+                      onChange={() => handlePrecisionChange(option.value)}
+                    />
+                    {option.label}
+                  </label>
+                ))}
               </div>
-            ))}
+            </fieldset>
 
-            {images.length < MAX_IMAGES && !addingImage && (
-              <button
-                type="button"
-                onClick={() => setAddingImage(true)}
-                aria-label="Add a photo"
-                className="flex h-17.5 w-17.5 shrink-0 items-center justify-center rounded-full border-2 border-dashed border-sand-400 text-xl text-sand-600 transition-colors hover:border-clay hover:text-clay"
-              >
-                +
-              </button>
-            )}
+            <div className="field">
+              <label htmlFor="dateValue">Date</label>
+              {precision === "year" ? (
+                <input
+                  id="dateValue"
+                  type="number"
+                  required
+                  min={1}
+                  max={9999}
+                  value={dateValue}
+                  onChange={(e) => setDateValue(e.target.value)}
+                  className="input"
+                />
+              ) : precision === "month" ? (
+                <input
+                  id="dateValue"
+                  type="month"
+                  required
+                  value={dateValue}
+                  onChange={(e) => setDateValue(e.target.value)}
+                  className="input"
+                />
+              ) : (
+                <input
+                  id="dateValue"
+                  type="date"
+                  required
+                  value={dateValue}
+                  onChange={(e) => setDateValue(e.target.value)}
+                  className="input"
+                />
+              )}
+            </div>
           </div>
 
-          {images.length < MAX_IMAGES && addingImage && (
-            <div className="mt-2.5 flex gap-2">
-              <input
-                id="imageUrlInput"
-                type="url"
-                autoFocus
-                placeholder="https://photos.google.com/… or any image link"
-                value={imageUrlInput}
-                onChange={(e) => {
-                  setImageUrlInput(e.target.value);
-                  setImageError(null);
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    addImage();
-                  }
-                }}
-                className="input flex-1"
-              />
-              <button
-                type="button"
-                onClick={addImage}
-                className="btn btn-secondary btn-sm"
-              >
-                Add
-              </button>
-            </div>
-          )}
-          {imageError && (
-            <p className="mt-1 text-xs text-clay-700">{imageError}</p>
-          )}
-          <p className="mt-1.5 text-xs text-sand-600">
-            Paste a link to a photo (e.g. a shared Google Photos image). Up to{" "}
-            {MAX_IMAGES}.
-          </p>
-        </div>
+          <div className="field">
+            <label htmlFor="imageUrlInput">Photos</label>
 
-        <div className="field">
-          <label htmlFor="linkUrlInput">Links</label>
-
-          {links.length > 0 && (
-            <ul className="mb-2 flex flex-col gap-1.5">
-              {links.map((link) => (
-                <li
-                  key={link.url}
-                  className="flex items-center justify-between gap-2 rounded-full bg-sand-100 px-4 py-2 text-sm"
-                >
-                  <span className="truncate text-sand-800">
-                    {link.label || link.url}
-                  </span>
+            <div className="flex flex-wrap gap-2.5">
+              {images.map((src) => (
+                <div key={src} className="relative h-17.5 w-17.5 shrink-0">
+                  <div className="h-full w-full overflow-hidden rounded-md">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={src}
+                      alt=""
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
                   <button
                     type="button"
-                    onClick={() => removeLink(link.url)}
-                    aria-label="Remove link"
-                    className="shrink-0 text-sand-500 transition-colors hover:text-ink"
+                    onClick={() => removeImage(src)}
+                    aria-label="Remove photo"
+                    className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-sand-900 text-xs text-cream shadow-sm"
                   >
                     ×
                   </button>
-                </li>
+                </div>
               ))}
-            </ul>
-          )}
 
-          {links.length < MAX_LINKS && (
-            <div className="flex flex-col gap-2 sm:flex-row">
-              <input
-                id="linkUrlInput"
-                type="url"
-                placeholder="https://…"
-                value={linkUrlInput}
-                onChange={(e) => {
-                  setLinkUrlInput(e.target.value);
-                  setLinkError(null);
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    addLink();
-                  }
-                }}
-                className="input flex-1"
-              />
-              <input
-                id="linkLabelInput"
-                type="text"
-                placeholder="Label (optional)"
-                value={linkLabelInput}
-                onChange={(e) => setLinkLabelInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    addLink();
-                  }
-                }}
-                className="input sm:w-40"
-              />
-              <button
-                type="button"
-                onClick={addLink}
-                className="btn btn-secondary btn-sm"
-              >
-                Add
-              </button>
+              {images.length < MAX_IMAGES && !addingImage && (
+                <button
+                  type="button"
+                  onClick={() => setAddingImage(true)}
+                  aria-label="Add a photo"
+                  className="flex h-17.5 w-17.5 shrink-0 items-center justify-center rounded-full border-2 border-dashed border-sand-400 text-xl text-sand-600 transition-colors hover:border-clay hover:text-clay"
+                >
+                  +
+                </button>
+              )}
             </div>
-          )}
-          {linkError && (
-            <p className="mt-1 text-xs text-clay-700">{linkError}</p>
-          )}
-          <p className="mt-1.5 text-xs text-sand-600">
-            Add links to anything related to this memory. Up to {MAX_LINKS}.
-          </p>
-        </div>
 
+            {images.length < MAX_IMAGES && addingImage && (
+              <div className="mt-2.5 flex gap-2">
+                <input
+                  id="imageUrlInput"
+                  type="url"
+                  autoFocus
+                  placeholder="https://photos.google.com/… or any image link"
+                  value={imageUrlInput}
+                  onChange={(e) => {
+                    setImageUrlInput(e.target.value);
+                    setImageError(null);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      addImage();
+                    }
+                  }}
+                  className="input flex-1"
+                />
+                <button
+                  type="button"
+                  onClick={addImage}
+                  className="btn btn-secondary btn-sm"
+                >
+                  Add
+                </button>
+              </div>
+            )}
+            {imageError && (
+              <p className="mt-1 text-xs text-clay-700">{imageError}</p>
+            )}
+            <p className="mt-1.5 text-xs text-sand-600">
+              Paste a link to a photo (e.g. a shared Google Photos image). Up to{" "}
+              {MAX_IMAGES}.
+            </p>
+          </div>
+
+          <div className="field">
+            <label htmlFor="linkUrlInput">Links</label>
+
+            {links.length > 0 && (
+              <ul className="mb-2 flex flex-col gap-1.5">
+                {links.map((link) => (
+                  <li
+                    key={link.url}
+                    className="flex items-center justify-between gap-2 rounded-full bg-sand-100 px-4 py-2 text-sm"
+                  >
+                    <span className="truncate text-sand-800">
+                      {link.label || link.url}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => removeLink(link.url)}
+                      aria-label="Remove link"
+                      className="shrink-0 text-sand-500 transition-colors hover:text-ink"
+                    >
+                      ×
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {links.length < MAX_LINKS && (
+              <div className="flex flex-col gap-2 sm:flex-row">
+                <input
+                  id="linkUrlInput"
+                  type="url"
+                  placeholder="https://…"
+                  value={linkUrlInput}
+                  onChange={(e) => {
+                    setLinkUrlInput(e.target.value);
+                    setLinkError(null);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      addLink();
+                    }
+                  }}
+                  className="input flex-1"
+                />
+                <input
+                  id="linkLabelInput"
+                  type="text"
+                  placeholder="Label (optional)"
+                  value={linkLabelInput}
+                  onChange={(e) => setLinkLabelInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      addLink();
+                    }
+                  }}
+                  className="input sm:w-40"
+                />
+                <button
+                  type="button"
+                  onClick={addLink}
+                  className="btn btn-secondary btn-sm"
+                >
+                  Add
+                </button>
+              </div>
+            )}
+            {linkError && (
+              <p className="mt-1 text-xs text-clay-700">{linkError}</p>
+            )}
+            <p className="mt-1.5 text-xs text-sand-600">
+              Add links to anything related to this memory. Up to {MAX_LINKS}.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="shrink-0 border-t border-sand-200 bg-cream px-5 py-4 sm:px-6">
         <button type="submit" className="btn btn-primary btn-block">
           {submitLabel}
         </button>

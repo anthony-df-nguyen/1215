@@ -12,13 +12,17 @@ export function MemoryDetail({ memory }: { memory: Memory }) {
 
   if (editing) {
     return (
-      <MemoryForm
-        action={updateMemory}
-        memory={memory}
-        heading="Edit memory"
-        onDone={() => setEditing(false)}
-        submitLabel="Save changes"
-      />
+      <div className="fixed inset-0 z-40 flex flex-col bg-cream">
+        <div className="mx-auto flex w-full max-w-2xl min-h-0 flex-1 flex-col">
+          <MemoryForm
+            action={updateMemory}
+            memory={memory}
+            heading="Edit memory"
+            onDone={() => setEditing(false)}
+            submitLabel="Save changes"
+          />
+        </div>
+      </div>
     );
   }
 
@@ -47,7 +51,10 @@ export function MemoryDetail({ memory }: { memory: Memory }) {
             }}
           >
             <input type="hidden" name="id" value={memory.id} />
-            <button type="submit" className="btn btn-ghost btn-sm text-clay-700">
+            <button
+              type="submit"
+              className="btn btn-ghost btn-sm text-clay-700"
+            >
               Delete
             </button>
           </form>

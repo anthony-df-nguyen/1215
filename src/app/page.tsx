@@ -102,7 +102,7 @@ export default async function Home({
           <div className="flex flex-col gap-7">
             {groups.map((group) => (
               <section key={group.year} className="flex flex-col gap-4">
-                <div className="flex items-baseline gap-3">
+                <div className="flex items-baseline items-center gap-3">
                   <h2 className="text-4xl leading-none">{group.year}</h2>
                   <span className="tag tag-accent-2">
                     {group.items.length}{" "}
